@@ -265,6 +265,7 @@ strong{font-weight:600;color:var(--ink);}
     </div>
 
     <p class="note js-nota-esc"></p>
+    <p class="note"><strong>Por qué aquí dice 3,22 y en Orbit dice 4,29.</strong> Es el mismo dinero, dividido por bases distintas. <strong>Orbit</strong> divide por la venta total de la tienda, con IVA y con envío: en la misma ventana da <strong>4,19</strong>, y en lo corrido de octubre va en <strong>4,29</strong>. <strong>Nosotros</strong> dividimos por la venta de mercancía sin IVA, que es la única base contra la que el break-even tiene sentido: el costo del producto y las comisiones se comen esa venta, no el IVA ni el flete. Para pasar de una a otra se multiplica por <strong>1,30</strong>, que es lo que pesan el IVA y el envío sobre cada pedido ($145.843 cobrados ÷ $112.118 de mercancía). Por eso mismo el break-even de 1,68 se compara contra <strong>2,18</strong> cuando se mira el ROAS que reporta Meta, que va sobre esa misma venta total.</p>
   </section>
 
   <!-- ESCENARIO DEL MES -->
@@ -343,6 +344,7 @@ strong{font-weight:600;color:var(--ink);}
   var HOY = {venta:88129330, pauta:21016604, pedidos:602, mercSinIva:67715913, antesPauta:40397962, fee:3800000};
   HOY.blended = HOY.mercSinIva / HOY.pauta;              /* 3,2220 */
   HOY.cpa = HOY.pauta / HOY.pedidos;                     /* $34.911 */
+  HOY.blendedOrbit = HOY.venta / HOY.pauta;              /* 4,19: así lo muestra Orbit, con IVA y envío */
   HOY.queda = HOY.antesPauta - HOY.pauta - HOY.fee;      /* $15.581.358 */
 
   var $ = function(s){return document.querySelector(s);};
@@ -479,7 +481,7 @@ strong{font-weight:600;color:var(--ink);}
         '<div class="rb-end"><span class="label">Break-even ROAS</span><b>' + dec(ber, 2) +
           '</b><em>Lo mínimo para no perder plata en cada venta</em></div>' +
         '<div class="rb-end r"><span class="label">Blended ROAS hoy</span><b>' + dec(blended, 2) +
-          '</b><em>Lo que la marca está logrando</em></div>' +
+          '</b><em>Lo que la marca está logrando. En Orbit, sobre la venta total, se ve como ' + dec(HOY.blendedOrbit, 2) + '</em></div>' +
       '</div>' +
       '<div class="rb-bar">' +
         '<i class="rb-loss" style="width:' + pos(ber) + '%"></i>' +
