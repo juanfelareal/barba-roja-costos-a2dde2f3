@@ -254,7 +254,7 @@ strong{font-weight:600;color:var(--ink);}
       <label class="in"><span>Comisión Shopify por pasarela externa</span><div class="row"><input type="number" id="shopPct" value="1" step="0.1"><em>%</em></div></label>
       <label class="in pend"><span>Impuestos sobre la venta <span class="tagm w">Por confirmar</span></span><div class="row"><input type="number" id="impPct" value="0" step="0.1"><em>%</em></div></label>
       <label class="in"><span>Fee mensual de LA REAL</span><div class="row"><em>$</em><input type="number" id="fee" value="4.5" step="0.1"><em>millones</em></div></label>
-      <label class="in"><span>Comisión de LA REAL sobre la utilidad</span><div class="row"><input type="number" id="comPct" value="10" step="1"><em>%</em></div></label>
+      <label class="in"><span>Comisión de LA REAL sobre la utilidad</span><div class="row"><input type="number" id="comPct" value="12" step="1"><em>%</em></div></label>
     </div>
 
   </section>
@@ -408,7 +408,7 @@ strong{font-weight:600;color:var(--ink);}
   /* El mes: de lo que cobra la tienda a lo que le queda a la marca. */
   function escenario(p, m){
     var venta = v('venta') * 1e6;   /* el campo se escribe en millones */
-    var pedidos = venta / p.cobrado;
+    var pedidos = Math.round(venta / p.cobrado);   /* los pedidos son enteros: así cuadra con el documento de escalado */
     var merc = pedidos * p.ticket;
     var pauta = v('roas') > 0 ? merc / v('roas') : 0;
     var antesPauta = pedidos * m;
