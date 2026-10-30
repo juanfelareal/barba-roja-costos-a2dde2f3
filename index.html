@@ -107,6 +107,32 @@ strong{font-weight:600;color:var(--ink);}
 .pr.hl .be{font-weight:600;}
 .fine{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.5;}
 
+/* Barra de ROAS: del break-even al blended de hoy, con el espacio para escalar en medio */
+.tl-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:36px 28px 22px;margin-top:26px;}
+.tl{position:relative;height:212px;}
+.tl-track{position:absolute;left:0;right:0;top:118px;height:2px;background:var(--line-2);}
+.tl-loss,.tl-room{position:absolute;top:110px;height:18px;left:var(--a);width:calc(var(--b) - var(--a));border-radius:999px;}
+.tl-loss{background:repeating-linear-gradient(135deg,rgba(210,69,59,.18) 0 6px,rgba(210,69,59,.06) 6px 12px);}
+.tl-loss span{position:absolute;left:0;top:30px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#B23A31;white-space:nowrap;}
+.tl-room{background:#44BF47;}
+.tl-room span{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#2c8a2f;font-weight:500;white-space:nowrap;}
+.tl-room span::after{content:"";display:block;height:8px;border:1px solid #44BF47;border-top:0;margin:4px -60px 0;border-radius:0 0 6px 6px;transform:scaleY(-1);}
+.stop{position:absolute;left:var(--x);top:0;bottom:0;width:0;}
+.stop .pin{position:absolute;left:-7px;top:112px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:2px solid var(--ink);}
+.stop .txt{position:absolute;top:146px;transform:translateX(-50%);text-align:center;white-space:nowrap;}
+.stop .txt b{display:block;font-size:20px;font-weight:500;letter-spacing:-.02em;}
+.stop .txt em{display:block;font-style:normal;font-size:12px;color:var(--muted);line-height:1.45;}
+.stop.end .pin{width:20px;height:20px;left:-10px;top:109px;background:var(--ink);}
+.stop.end.right .pin{background:#44BF47;border-color:#2c8a2f;}
+.stop.end .txt{top:0;}
+.stop.end .txt b{font-size:clamp(34px,6vw,46px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-top:4px;}
+.stop.end .txt em{font-size:12.5px;color:var(--ink-2);}
+.stop.end.left .txt{transform:translateX(-30%);text-align:left;}
+.stop.end.left .txt .label{justify-content:flex-start;}
+.stop.end.right .txt{transform:translateX(-70%);text-align:right;}
+.stop.end.right .txt .label{justify-content:flex-end;}
+.tl-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--muted);border-top:1px dashed var(--line-2);padding-top:8px;margin-top:4px;}
+
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px;}
 .fact{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;}
 .fact b{display:block;font-size:30px;font-weight:400;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums;}
@@ -137,6 +163,21 @@ strong{font-weight:600;color:var(--ink);}
   .doc-meta{text-align:left;}
   section{padding-top:52px;}
   .facts{grid-template-columns:1fr;}
+  .tl-card{padding:26px 18px 18px;}
+  .tl{height:auto;min-height:480px;}
+  .tl-track{left:22px;right:auto;top:0;bottom:0;width:2px;height:auto;}
+  .tl-loss,.tl-room{left:14px;width:18px;top:var(--a);height:calc(var(--b) - var(--a));}
+  .tl-room span,.tl-loss span{display:none;}
+  .stop{left:0;right:0;top:var(--x);bottom:auto;width:auto;height:0;}
+  .stop .pin{left:16px;top:-7px;}
+  .stop.end .pin{left:13px;top:-10px;}
+  .stop .txt,.stop.end .txt,.stop.end.left .txt,.stop.end.right .txt{left:52px;top:0;transform:translateY(-50%);text-align:left;white-space:normal;}
+  .stop .txt b{display:inline;font-size:18px;margin-right:8px;}
+  .stop .txt em{display:inline;margin-right:8px;}
+  .stop.end .txt b{display:block;font-size:34px;}
+  .stop.end .txt em{display:block;}
+  .stop.end .txt .label,.stop.end.right .txt .label{justify-content:flex-start;}
+  .tl-axis{display:none;}
   .ana{padding:22px 18px;}
   .ana-bar{height:22px;}
   .in > span{min-height:0;}
@@ -215,11 +256,26 @@ strong{font-weight:600;color:var(--ink);}
       <label class="in"><span>Comisión de LA REAL sobre la utilidad</span><div class="row"><input type="number" id="comPct" value="10" step="1"><em>%</em></div></label>
     </div>
 
+  </section>
+
+  <!-- ESCALABILIDAD -->
+  <section>
+    <p class="label">La escalabilidad</p>
+    <h2>De <b class="js-ber-t">1,68</b> a <b class="js-blended-t">3,22</b>: <b>todo lo que está en medio es margen para crecer.</b></h2>
+    <p>A la izquierda, el retorno mínimo para no perder plata en cada venta: sale de los costos de arriba, así que se mueve con ellos. A la derecha, el retorno que la marca está logrando hoy, que es un dato medido y no se mueve. La distancia entre los dos es el espacio real que hay para invertir más.</p>
+
+    <div class="tl-card">
+      <div class="tl js-tl"></div>
+      <div class="tl-axis js-axis"></div>
+    </div>
+
     <div class="facts">
       <div class="fact"><b class="js-margen">$66.888</b><span>Lo máximo que se puede pagar por una venta sin perder plata (CPA máximo)</span></div>
-      <div class="fact"><b class="js-ber">1,68</b><span>Break-even ROAS contra la venta de mercancía sin IVA</span></div>
-      <div class="fact dark"><b class="js-bermeta">2,18</b><span>El mismo break-even en la base que reporta <strong>Meta</strong>: con IVA y con envío</span></div>
+      <div class="fact"><b class="js-cpahoy">$34.912</b><span>Lo que se está pagando hoy por cada venta, últimos 30 días</span></div>
+      <div class="fact dark"><b class="js-esc">1,9×</b><span class="js-esc-t">Escalabilidad <strong>alta</strong></span></div>
     </div>
+
+    <p class="note js-nota-esc"></p>
   </section>
 
   <!-- ESCENARIO DEL MES -->
@@ -294,7 +350,10 @@ strong{font-weight:600;color:var(--ink);}
     ['Tónico Crecimiento de Barba & Cabello', 42017, 16865, 293, '']
   ];
   var ESCENARIOS = [['Hoy', 88.1, 3.22], ['$250M', 250, 2.8], ['$280M', 280, 2.8], ['$300M', 300, 2.8]];
-  var HOY = {venta:88100000, pauta:21016604, pedidos:602, fee:3800000, comPct:0};
+  /* Hoy = datos medidos de los últimos 30 días en Orbit. No dependen de los supuestos de costo. */
+  var HOY = {venta:88100000, pauta:21016604, pedidos:602, mercSinIva:67715912, fee:3800000, comPct:0};
+  HOY.blended = HOY.mercSinIva / HOY.pauta;   /* 3,22 */
+  HOY.cpa = HOY.pauta / HOY.pedidos;          /* $34.912 */
 
   var $ = function(s){return document.querySelector(s);};
   var v = function(id){var n = parseFloat(document.getElementById(id).value); return isFinite(n) ? n : 0;};
@@ -410,6 +469,67 @@ strong{font-weight:600;color:var(--ink);}
     }).join('');
   }
 
+  /* La barra: el eje se estira si el break-even se sale de rango, y las paradas
+     intermedias son los medios puntos de ROAS que caben entre los dos extremos. */
+  function pintarBarra(p, m){
+    var ber = m > 0 ? p.ticket/m : 99;
+    var blended = HOY.blended;
+    var min = 1, max = Math.max(4, Math.ceil(blended * 2)/2 + 0.5, Math.ceil(ber * 2)/2 + 0.5);
+    var pos = function(r){ return Math.min(100, Math.max(0, (r - min)/(max - min) * 100)); };
+    var h = '<div class="tl-track"></div>';
+
+    if (ber >= blended) {
+      /* Sin espacio: el break-even ya alcanzó al retorno de hoy. */
+      h += '<div class="tl-loss" style="--a:0%;--b:' + pos(ber) + '%"><span>Pierde plata</span></div>';
+    } else {
+      h += '<div class="tl-loss" style="--a:0%;--b:' + pos(ber) + '%"><span>Pierde plata</span></div>' +
+           '<div class="tl-room" style="--a:' + pos(ber) + '%;--b:' + pos(blended) + '%"><span>Espacio para escalar</span></div>';
+    }
+
+    h += '<div class="stop end left" style="--x:' + pos(ber) + '%"><span class="pin"></span><div class="txt">' +
+         '<span class="label">Break-even ROAS</span><b>' + dec(ber, 2) + '</b>' +
+         '<em>Pago máximo por venta: ' + cop(m) + '</em><em>Deja: $0 por pedido</em></div></div>';
+
+    /* En vertical cada extremo ocupa mucho más alto, así que caben menos paradas intermedias. */
+    var aire = window.matchMedia('(max-width:720px)').matches ? 0.45 : 0.18;
+    for (var r = Math.ceil((ber + aire) * 2)/2; r <= blended - aire; r += 0.5) {
+      var cpa = p.ticket / r;
+      h += '<div class="stop" style="--x:' + pos(r) + '%"><span class="pin"></span><div class="txt">' +
+           '<b>' + dec(r, 1) + '</b><em>Paga ' + cop(cpa) + '</em><em>Deja ' + cop(m - cpa) + '</em></div></div>';
+    }
+
+    h += '<div class="stop end right" style="--x:' + pos(blended) + '%"><span class="pin"></span><div class="txt">' +
+         '<span class="label">Blended ROAS hoy</span><b>' + dec(blended, 2) + '</b>' +
+         '<em>Pago por venta hoy: ' + cop(HOY.cpa) + '</em><em>Deja: ' + cop(m - HOY.cpa) + ' por pedido</em></div></div>';
+
+    $('.js-tl').innerHTML = h;
+    var ejes = '';
+    for (var a = min; a <= max + 0.01; a += (max - min) / 3) ejes += '<span>' + dec(a, 1) + '</span>';
+    $('.js-axis').innerHTML = ejes;
+
+    var ratio = ber > 0 ? blended/ber : 0;
+    var nivel = ratio >= 1.8 ? 'alta' : ratio >= 1.5 ? 'media' : 'baja';
+    $('.js-ber-t').textContent = dec(ber, 2);
+    $('.js-blended-t').textContent = dec(blended, 2);
+    $('.js-cpahoy').textContent = cop(HOY.cpa);
+    $('.js-esc').textContent = dec(ratio, 1) + '×';
+    $('.js-esc-t').innerHTML = (ratio >= 1.8 ? 'Hay el doble de espacio del que se está usando. ' : '') +
+                               'Escalabilidad <strong>' + nivel + '</strong>';
+
+    var estructura = {
+      alta: 'Con escalabilidad alta la cuenta se organiza en una campaña de escalado y varias de prueba, y se sube el presupuesto por escalones.',
+      media: 'Con escalabilidad media la cuenta se organiza en una campaña de escalado y una sola de prueba, y se sube más despacio.',
+      baja: 'Con escalabilidad baja no hay margen para subir presupuesto: primero hay que arreglar el costo por pedido.'
+    }[nivel];
+    $('.js-nota-esc').innerHTML = ber >= blended
+      ? '<strong>Con estos supuestos no queda espacio:</strong> el break-even de ' + dec(ber, 2) +
+        ' ya está por encima del retorno de hoy (' + dec(blended, 2) + '). Antes de subir presupuesto hay que bajar el costo por pedido.'
+      : '<strong>Hoy se paga ' + cop(HOY.cpa) + ' por venta y el techo es ' + cop(m) + ':</strong> queda ' +
+        dec(ratio, 2) + '× de espacio. ' + estructura +
+        ' El mismo break-even, llevado a la base que reporta <strong>Meta</strong> —con IVA y con envío—, es <strong>' +
+        dec(p.cobrado/m, 2) + '</strong>: ese es el número contra el que se decide apagar un anuncio.';
+  }
+
   function pintarVeredicto(p, m, e){
     var hoyMargen = HOY.pedidos * m - HOY.pauta - HOY.fee;
     var dif = e.queda - hoyMargen;
@@ -446,8 +566,6 @@ strong{font-weight:600;color:var(--ink);}
     $('.js-ticket').textContent = cop(p.ticket);
     $('.js-envio').textContent = cop(p.envio);
     $('.js-margen').textContent = cop(m);
-    $('.js-ber').textContent = m > 0 ? dec(p.ticket/m, 2) : '—';
-    $('.js-bermeta').textContent = m > 0 ? dec(p.cobrado/m, 2) : '—';
     $('.js-ped').textContent = ent(e.pedidos);
     $('.js-peddia').textContent = ent(e.pedidos/30) + ' al día';
     $('.js-pauta').textContent = mm(e.pauta);
@@ -456,6 +574,7 @@ strong{font-weight:600;color:var(--ink);}
       b.classList.toggle('on', parseFloat(b.dataset.v) === v('venta') && parseFloat(b.dataset.r) === v('roas'));
     });
     pintarAnatomia(p, m);
+    pintarBarra(p, m);
     pintarPL(p, m, e);
     pintarProductos(p, m);
     pintarVeredicto(p, m, e);
@@ -463,6 +582,7 @@ strong{font-weight:600;color:var(--ink);}
 
   pintarEscenarios();
   IDS.forEach(function(id){ document.getElementById(id).addEventListener('input', render); });
+  window.addEventListener('resize', render);   /* la barra cambia de paradas al pasar a vertical */
   render();
 })();
 </script>
