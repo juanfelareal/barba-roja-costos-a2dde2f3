@@ -47,6 +47,8 @@ strong{font-weight:600;color:var(--ink);}
 .x{color:var(--muted);font-weight:400;margin:0 4px;}
 .doc-meta{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:right;}
 .title{padding-top:48px;}
+/* Las notas van debajo de tarjetas de ancho completo: no heredan el ancho de lectura del texto. */
+section > .note{max-width:none;}
 .note{margin-top:18px;padding:16px 18px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);color:var(--ink-2);font-size:15px;}
 .note.warn{border-left-color:var(--warn);}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
