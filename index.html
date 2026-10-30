@@ -181,8 +181,9 @@ strong{font-weight:600;color:var(--ink);}
   .ana{padding:22px 18px;}
   .ana-bar{height:22px;}
   .in > span{min-height:0;}
-  .pl-r{grid-template-columns:1fr 104px;gap:10px;padding:13px 16px;}
+  .pl-r{grid-template-columns:1fr 118px;gap:10px;padding:13px 16px;}
   .pl-r .n.pp{display:none;}
+  .pl-r.tot .n{font-size:18px;}
   .pr.ph{display:none;}
   .pr{grid-template-columns:1fr 1fr;gap:8px 14px;padding:16px;}
   .pr .pn{grid-column:1/-1;font-weight:500;font-size:15px;}
@@ -351,14 +352,15 @@ strong{font-weight:600;color:var(--ink);}
   ];
   var ESCENARIOS = [['Hoy', 88.1, 3.22], ['$250M', 250, 2.8], ['$280M', 280, 2.8], ['$300M', 300, 2.8]];
   /* Hoy = datos medidos de los últimos 30 días en Orbit. No dependen de los supuestos de costo. */
-  var HOY = {venta:88100000, pauta:21016604, pedidos:602, mercSinIva:67715912, fee:3800000, comPct:0};
-  HOY.blended = HOY.mercSinIva / HOY.pauta;   /* 3,22 */
-  HOY.cpa = HOY.pauta / HOY.pedidos;          /* $34.912 */
+  var HOY = {venta:88129330, pauta:21016604, pedidos:602, mercSinIva:67715913, antesPauta:40397962, fee:3800000};
+  HOY.blended = HOY.mercSinIva / HOY.pauta;              /* 3,2220 */
+  HOY.cpa = HOY.pauta / HOY.pedidos;                     /* $34.911 */
+  HOY.queda = HOY.antesPauta - HOY.pauta - HOY.fee;      /* $15.581.358 */
 
   var $ = function(s){return document.querySelector(s);};
   var v = function(id){var n = parseFloat(document.getElementById(id).value); return isFinite(n) ? n : 0;};
   function cop(n){ return (n<0?'−$':'$') + Math.round(Math.abs(n)).toLocaleString('es-CO'); }
-  function mm(n){ if (Math.round(n/1e5) === 0) return '$0'; return (n<0?'−$':'$') + (Math.abs(n)/1e6).toLocaleString('es-CO',{minimumFractionDigits:1,maximumFractionDigits:1}) + 'M'; }
+  function mm(n){ return (n<0?'−$':'$') + Math.round(Math.abs(n)).toLocaleString('es-CO'); }
   function dec(n,d){ return n.toLocaleString('es-CO',{minimumFractionDigits:d,maximumFractionDigits:d}); }
   /* Las tarifas se escriben como las lee un colombiano: coma decimal y sin ceros de relleno. */
   function tar(n){ return n.toLocaleString('es-CO',{maximumFractionDigits:2}); }
@@ -531,15 +533,14 @@ strong{font-weight:600;color:var(--ink);}
   }
 
   function pintarVeredicto(p, m, e){
-    var hoyMargen = HOY.pedidos * m - HOY.pauta - HOY.fee;
-    var dif = e.queda - hoyMargen;
+    var dif = e.queda - HOY.queda;
     var txt;
     if (m <= 0) {
       txt = '<strong>Con estos supuestos cada pedido pierde plata antes de pautar.</strong> Revisa el costo de producto, el flete o las comisiones.';
     } else if (e.utilidad <= 0) {
       txt = '<strong>A este nivel de inversión y con ese retorno, la operación no deja utilidad.</strong> Sube el ROAS o baja la venta objetivo.';
     } else {
-      txt = '<strong>Hoy, con ' + mm(HOY.venta) + ' de venta y un fee de ' + mm(HOY.fee) + ', a Barba Roja le quedan ' + mm(hoyMargen) + '.</strong> ' +
+      txt = '<strong>Hoy, con ' + mm(HOY.venta) + ' de venta en los últimos 30 días, ' + mm(HOY.pauta) + ' de pauta y un fee de ' + mm(HOY.fee) + ', a Barba Roja le quedan ' + mm(HOY.queda) + '.</strong> ' +
             'En este escenario le quedarían ' + mm(e.queda) + ': ' + mm(Math.abs(dif)) + (dif >= 0 ? ' más' : ' menos') + ' al mes. ' +
             'LA REAL se llevaría ' + mm(e.fee + e.comision) + ' entre fee y comisión, el ' + dec((e.fee + e.comision)/e.utilidad*100, 1) + ' % de la utilidad de la operación.';
     }
