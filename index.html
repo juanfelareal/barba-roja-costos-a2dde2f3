@@ -239,8 +239,8 @@ strong{font-weight:600;color:var(--ink);}
       <label class="in"><span>Ticket de mercancía sin IVA, por pedido</span><div class="row"><em>$</em><input type="number" id="ticket" value="112118" step="100"></div></label>
       <label class="in"><span>IVA sobre la mercancía</span><div class="row"><input type="number" id="iva" value="19" step="1"><em>%</em></div></label>
       <label class="in"><span>Costo de producto, sobre la mercancía sin IVA</span><div class="row"><input type="number" id="costoPct" value="35.4" step="0.1"><em>%</em></div></label>
-      <label class="in"><span>Envío que se le cobra al cliente</span><div class="row"><em>$</em><input type="number" id="envio" value="12423" step="100"></div></label>
-      <label class="in pend"><span>Flete que la marca le paga a la transportadora <span class="tagm w">Por confirmar</span></span><div class="row"><em>$</em><input type="number" id="flete" value="12423" step="100"></div></label>
+      <label class="in"><span>Envío que se le cobra al cliente</span><div class="row"><em>$</em><input type="number" id="envio" value="11241" step="100"></div></label>
+      <label class="in pend"><span>Flete que la marca le paga a la transportadora <span class="tagm w">Por confirmar</span></span><div class="row"><em>$</em><input type="number" id="flete" value="11241" step="100"></div></label>
       <label class="in"><span>Comisión Bold, sobre el total cobrado</span><div class="row"><input type="number" id="boldPct" value="2.49" step="0.01"><em>% + $</em><input type="number" id="boldFijo" value="450" step="50"></div></label>
       <label class="in"><span>Comisión Shopify por pasarela externa</span><div class="row"><input type="number" id="shopPct" value="1" step="0.1"><em>%</em></div></label>
       <label class="in pend"><span>Impuestos sobre la venta <span class="tagm w">Por confirmar</span></span><div class="row"><input type="number" id="impPct" value="0" step="0.1"><em>%</em></div></label>
@@ -265,7 +265,7 @@ strong{font-weight:600;color:var(--ink);}
     </div>
 
     <p class="note js-nota-esc"></p>
-    <p class="note"><strong>Por qué aquí dice 3,32 y en Orbit dice 4,29.</strong> Es el mismo dinero, dividido por bases distintas. <strong>Orbit</strong> divide por la venta total de la tienda, con IVA y con envío. <strong>Nosotros</strong> dividimos por la venta de mercancía sin IVA, que es la única base contra la que el break-even tiene sentido: el costo del producto y las comisiones se comen esa venta, no el IVA ni el flete. Para pasar de una a otra se multiplica por <strong>1,30</strong>, que es lo que pesan el IVA y el envío sobre cada pedido ($145.843 cobrados ÷ $112.118 de mercancía). Por eso mismo el break-even de 1,68 se compara contra <strong>2,18</strong> cuando se mira el ROAS que reporta Meta, que va sobre esa misma venta total.</p>
+    <p class="note"><strong>Por qué aquí dice 3,33 y en Orbit dice 4,30.</strong> Es el mismo dinero, contado distinto. <strong>Orbit</strong> divide por la venta total de la tienda —con IVA, con envío y contando también los pedidos que todavía no se han pagado—. <strong>Nosotros</strong> dividimos por la venta de mercancía sin IVA, que es la única base contra la que el break-even tiene sentido: el costo del producto y las comisiones se comen esa venta, no el IVA ni el flete. Para pasar de una a otra se multiplica por <strong>1,29</strong>, que es lo que pesan el IVA y el envío sobre cada pedido ($144.661 cobrados ÷ $112.118 de mercancía). Por eso mismo el break-even de 1,68 se compara contra <strong>2,16</strong> cuando se mira el ROAS que reporta Meta, que va sobre esa misma venta total.</p>
   </section>
 
   <!-- ESCENARIO DEL MES -->
@@ -301,7 +301,7 @@ strong{font-weight:600;color:var(--ink);}
     <p class="label">Qué falta para cerrar</p>
     <h2>Cuatro datos <b>y el modelo queda completo.</b></h2>
     <ul class="inc">
-      <li><div>Cuánto le pagan a la transportadora por pedido<span>Hoy el modelo asume que el flete que pagan es igual a los $12.423 que le cobran al cliente, así que entra y sale. Si pagan más, la diferencia sale del margen de cada pedido.</span></div></li>
+      <li><div>Cuánto le pagan a la transportadora por pedido<span>Hoy el modelo asume que el flete que pagan es igual a los $11.241 que le cobran al cliente en promedio, así que entra y sale. Si pagan más, la diferencia sale del margen de cada pedido.</span></div></li>
       <li><div>Régimen de impuestos (SIMPLE u ordinario)<span>Es el único costo variable que todavía está en cero. Con el porcentaje real, el break-even queda cerrado del todo.</span></div></li>
       <li><div>Costo del Shampoo y el Acondicionador de 500 mL<span>Hoy están estimados como dos unidades de 250 mL. El Shampoo 500 mL es el quinto producto más vendido.</span></div></li>
       <li><div>Cómo se cuentan las ventas por WhatsApp<span>Si parte de la venta se cierra por WhatsApp y no queda en Shopify, no entra en estos números. Hay que acordar cómo se miden antes de que la comisión dependa de la utilidad.</span></div></li>
@@ -339,13 +339,14 @@ strong{font-weight:600;color:var(--ink);}
     ['Shampoo 500 mL', 65546, 26300, 180, 'Costo por confirmar'],
     ['Tónico Crecimiento de Barba & Cabello', 42017, 16865, 293, '']
   ];
-  var ESCENARIOS = [['Hoy', 84.8, 3.32], ['$250M', 250, 2.8], ['$280M', 280, 2.8], ['$300M', 300, 2.8]];
+  var ESCENARIOS = [['Hoy', 84.5, 3.33], ['$250M', 250, 2.8], ['$280M', 280, 2.8], ['$300M', 300, 2.8]];
   /* Hoy = datos medidos de los últimos 30 días en Orbit. No dependen de los supuestos de costo. */
-  var HOY = {venta:84840910, pauta:19756582, pedidos:576, dias:29, mercSinIva:65553034, antesPauta:39127112, fee:3800000};
-  HOY.blended = HOY.mercSinIva / HOY.pauta;              /* 3,3180 */
-  HOY.cpa = HOY.pauta / HOY.pedidos;                     /* $34.300 */
-  HOY.blendedOrbit = HOY.venta / HOY.pauta;              /* 4,29: así lo muestra Orbit, con IVA y envío */
-  HOY.queda = HOY.antesPauta - HOY.pauta - HOY.fee;      /* $15.570.530 */
+  var HOY = {venta:84513216, pauta:19762426, pedidos:577, dias:29, mercSinIva:65733454, antesPauta:39254650, fee:3800000};
+  HOY.orbitTodos = 85055616 / HOY.pauta;                 /* 4,30: Orbit cuenta además los pedidos sin pagar */
+  HOY.blended = HOY.mercSinIva / HOY.pauta;              /* 3,3262 */
+  HOY.cpa = HOY.pauta / HOY.pedidos;                     /* $34.250 */
+  HOY.blendedOrbit = HOY.venta / HOY.pauta;              /* 4,28 sobre pedidos pagados */
+  HOY.queda = HOY.antesPauta - HOY.pauta - HOY.fee;      /* $15.692.224 */
 
   var $ = function(s){return document.querySelector(s);};
   var v = function(id){var n = parseFloat(document.getElementById(id).value); return isFinite(n) ? n : 0;};
@@ -481,7 +482,7 @@ strong{font-weight:600;color:var(--ink);}
         '<div class="rb-end"><span class="label">Break-even ROAS</span><b>' + dec(ber, 2) +
           '</b><em>Lo mínimo para no perder plata en cada venta</em></div>' +
         '<div class="rb-end r"><span class="label">Blended ROAS hoy</span><b>' + dec(blended, 2) +
-          '</b><em>Lo que la marca está logrando. En Orbit, sobre la venta total, se ve como ' + dec(HOY.blendedOrbit, 2) + '</em></div>' +
+          '</b><em>Lo que la marca está logrando. En Orbit, sobre la venta total, se ve como ' + dec(HOY.orbitTodos, 2) + '</em></div>' +
       '</div>' +
       '<div class="rb-bar">' +
         '<i class="rb-loss" style="width:' + pos(ber) + '%"></i>' +
