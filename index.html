@@ -206,7 +206,7 @@ strong{font-weight:600;color:var(--ink);}
     <p class="lede">Este documento abre el pedido promedio rubro por rubro y lo lleva hasta el escenario del mes. Todos los supuestos son editables: cambia cualquier número y todo se recalcula en vivo.</p>
     <div class="pills">
       <span class="pill"><span class="dot"></span>Datos de Shopify y Meta en Orbit</span>
-      <span class="pill">90 días, al 25 de octubre · 1.877 pedidos</span>
+      <span class="pill">Costos: 90 días al 25 de octubre · Hoy: lo corrido de octubre</span>
       <span class="pill">Los supuestos en naranja están por confirmar</span>
     </div>
   </div>
@@ -260,12 +260,12 @@ strong{font-weight:600;color:var(--ink);}
 
     <div class="facts">
       <div class="fact"><b class="js-margen">$66.888</b><span>Lo máximo que se puede pagar por una venta sin perder plata (CPA máximo)</span></div>
-      <div class="fact"><b class="js-cpahoy">$34.912</b><span>Lo que se está pagando hoy por cada venta, últimos 30 días</span></div>
+      <div class="fact"><b class="js-cpahoy">$34.912</b><span>Lo que se está pagando hoy por cada venta, en lo corrido de octubre</span></div>
       <div class="fact dark"><b class="js-esc">1,9×</b><span class="js-esc-t">Escalabilidad <strong>alta</strong></span></div>
     </div>
 
     <p class="note js-nota-esc"></p>
-    <p class="note"><strong>Por qué aquí dice 3,22 y en Orbit dice 4,29.</strong> Es el mismo dinero, dividido por bases distintas. <strong>Orbit</strong> divide por la venta total de la tienda, con IVA y con envío: en la misma ventana da <strong>4,19</strong>, y en lo corrido de octubre va en <strong>4,29</strong>. <strong>Nosotros</strong> dividimos por la venta de mercancía sin IVA, que es la única base contra la que el break-even tiene sentido: el costo del producto y las comisiones se comen esa venta, no el IVA ni el flete. Para pasar de una a otra se multiplica por <strong>1,30</strong>, que es lo que pesan el IVA y el envío sobre cada pedido ($145.843 cobrados ÷ $112.118 de mercancía). Por eso mismo el break-even de 1,68 se compara contra <strong>2,18</strong> cuando se mira el ROAS que reporta Meta, que va sobre esa misma venta total.</p>
+    <p class="note"><strong>Por qué aquí dice 3,32 y en Orbit dice 4,29.</strong> Es el mismo dinero, dividido por bases distintas. <strong>Orbit</strong> divide por la venta total de la tienda, con IVA y con envío. <strong>Nosotros</strong> dividimos por la venta de mercancía sin IVA, que es la única base contra la que el break-even tiene sentido: el costo del producto y las comisiones se comen esa venta, no el IVA ni el flete. Para pasar de una a otra se multiplica por <strong>1,30</strong>, que es lo que pesan el IVA y el envío sobre cada pedido ($145.843 cobrados ÷ $112.118 de mercancía). Por eso mismo el break-even de 1,68 se compara contra <strong>2,18</strong> cuando se mira el ROAS que reporta Meta, que va sobre esa misma venta total.</p>
   </section>
 
   <!-- ESCENARIO DEL MES -->
@@ -339,13 +339,13 @@ strong{font-weight:600;color:var(--ink);}
     ['Shampoo 500 mL', 65546, 26300, 180, 'Costo por confirmar'],
     ['Tónico Crecimiento de Barba & Cabello', 42017, 16865, 293, '']
   ];
-  var ESCENARIOS = [['Hoy', 88.1, 3.22], ['$250M', 250, 2.8], ['$280M', 280, 2.8], ['$300M', 300, 2.8]];
+  var ESCENARIOS = [['Hoy', 84.8, 3.32], ['$250M', 250, 2.8], ['$280M', 280, 2.8], ['$300M', 300, 2.8]];
   /* Hoy = datos medidos de los últimos 30 días en Orbit. No dependen de los supuestos de costo. */
-  var HOY = {venta:88129330, pauta:21016604, pedidos:602, mercSinIva:67715913, antesPauta:40397962, fee:3800000};
-  HOY.blended = HOY.mercSinIva / HOY.pauta;              /* 3,2220 */
-  HOY.cpa = HOY.pauta / HOY.pedidos;                     /* $34.911 */
-  HOY.blendedOrbit = HOY.venta / HOY.pauta;              /* 4,19: así lo muestra Orbit, con IVA y envío */
-  HOY.queda = HOY.antesPauta - HOY.pauta - HOY.fee;      /* $15.581.358 */
+  var HOY = {venta:84840910, pauta:19756582, pedidos:576, dias:29, mercSinIva:65553034, antesPauta:39127112, fee:3800000};
+  HOY.blended = HOY.mercSinIva / HOY.pauta;              /* 3,3180 */
+  HOY.cpa = HOY.pauta / HOY.pedidos;                     /* $34.300 */
+  HOY.blendedOrbit = HOY.venta / HOY.pauta;              /* 4,29: así lo muestra Orbit, con IVA y envío */
+  HOY.queda = HOY.antesPauta - HOY.pauta - HOY.fee;      /* $15.570.530 */
 
   var $ = function(s){return document.querySelector(s);};
   var v = function(id){var n = parseFloat(document.getElementById(id).value); return isFinite(n) ? n : 0;};
@@ -530,7 +530,7 @@ strong{font-weight:600;color:var(--ink);}
     } else if (e.utilidad <= 0) {
       txt = '<strong>A este nivel de inversión y con ese retorno, la operación no deja utilidad.</strong> Sube el ROAS o baja la venta objetivo.';
     } else {
-      txt = '<strong>Hoy, con ' + mm(HOY.venta) + ' de venta en los últimos 30 días, ' + mm(HOY.pauta) + ' de pauta y un fee de ' + mm(HOY.fee) + ', a Barba Roja le quedan ' + mm(HOY.queda) + '.</strong> ' +
+      txt = '<strong>Hoy, con ' + mm(HOY.venta) + ' de venta entre el 1 y el 29 de octubre, ' + mm(HOY.pauta) + ' de pauta y un fee de ' + mm(HOY.fee) + ', a Barba Roja le quedan ' + mm(HOY.queda) + '.</strong> ' +
             'En este escenario le quedarían ' + mm(e.queda) + ': ' + mm(Math.abs(dif)) + (dif >= 0 ? ' más' : ' menos') + ' al mes. ' +
             'LA REAL se llevaría ' + mm(e.fee + e.comision) + ' entre fee y comisión, el ' + dec((e.fee + e.comision)/e.utilidad*100, 1) + ' % de la utilidad de la operación.';
     }
